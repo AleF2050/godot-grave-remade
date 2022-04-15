@@ -41,6 +41,9 @@ func _physics_process(delta):
 			else:
 				$AnimatedSprite.animation = "stand"
 				speed = Vector2(0.0,0.0)
+				
+			if Input.is_action_pressed("k_action1"):
+				pass
 			
 			speed = move_and_slide(speed)
 		ROLL: # ROLL STATE
