@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scenes/L_GraveYard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/objects/game/GameControl.gd" type="Script" id=2]
+
+[node name="GameControl" type="Node"]
+script = ExtResource( 2 )
+
+[node name="L_GraveYard" parent="." instance=ExtResource( 1 )]
