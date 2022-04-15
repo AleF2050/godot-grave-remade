@@ -46,9 +46,13 @@ func _physics_process(delta):
 			if Input.is_action_pressed("k_action1"):
 				$AnimatedSprite.animation = "rolling"
 				_state = ROLL
+				if $AnimatedSprite.flip_h == true:
+					speed.x = -roll_speed
+				elif $AnimatedSprite.flip_h == false:
+					speed.x = roll_speed
 			
 			speed = move_and_slide(speed)
 		ROLL: # ROLL STATE
 			# Rolling
-			speed.x = roll_speed
+			speed.x -= 2
 			speed = move_and_slide(speed)
