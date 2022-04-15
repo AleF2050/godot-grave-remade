@@ -9,18 +9,6 @@
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 40, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 40, 48 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
@@ -48,6 +36,18 @@ region = Rect2( 200, 0, 40, 48 )
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
 region = Rect2( 200, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 40, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
@@ -84,11 +84,6 @@ animations = [ {
 "name": "jmp_up",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "stand",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "move",
@@ -99,10 +94,15 @@ animations = [ {
 "name": "jmp_down",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "stand",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "rolling",
-"speed": 10.0
+"speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -123,3 +123,5 @@ position = Vector2( 0, -14 )
 shape = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

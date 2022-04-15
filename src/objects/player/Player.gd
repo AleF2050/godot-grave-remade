@@ -54,5 +54,16 @@ func _physics_process(delta):
 			speed = move_and_slide(speed)
 		ROLL: # ROLL STATE
 			# Rolling
-			speed.x -= 2
+			if !(speed.x >= 2 or speed.x <= 2):
+				if $AnimatedSprite.flip_h == true:
+					speed.x += 2
+				elif $AnimatedSprite.flip_h == false:
+					speed.x -= 2
 			speed = move_and_slide(speed)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "rolling":
+		_state = GROUND
+		$AnimatedSprite.animation = "stand"
+		speed.x = 0
