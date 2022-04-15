@@ -8,8 +8,9 @@ enum {
 
 # ... INIT VARIABLES
 export var move_speed = 90
+export var roll_speed = 160
 var speed = Vector2()
-var state = GROUND
+var _state = GROUND
 
 #export var gravity = 3
 #export var run_speed_factor = 1.8
@@ -25,7 +26,7 @@ func _ready():
 # ... PHYSICS PROCESS (mostly for movement)
 func _physics_process(delta):
 	# State check
-	match state:
+	match _state:
 		GROUND: # GROUND STATE
 			# Moving the character
 			if Input.is_action_pressed("k_left"):
@@ -43,11 +44,11 @@ func _physics_process(delta):
 				speed = Vector2(0.0,0.0)
 				
 			if Input.is_action_pressed("k_action1"):
-				pass
+				$AnimatedSprite.animation = "rolling"
+				_state = ROLL
 			
 			speed = move_and_slide(speed)
 		ROLL: # ROLL STATE
 			# Rolling
-			if Input.is_action_pressed("k_action1"):
-				$AnimatedSprite.animation = "rolling"
+			speed.x = roll_speed
 			speed = move_and_slide(speed)
