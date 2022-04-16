@@ -112,8 +112,12 @@ _global_script_class_icons={
 
 config/name="Grave Remade"
 config/description="Recreation of HeartBeast's Game Jam game, Grave, remade in Godot 3 with some slight changes of my own."
-run/main_scene="res://src/objects/game/GameControl.tscn"
+run/main_scene="res://src/scenes/L_GraveYard.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameControl="*res://src/objects/game/GameControl.tscn"
 
 [display]
 

@@ -1,11 +1,6 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-#Initiating game stuff
+# Initiating game stuff
 func _ready():
 	var myScreenSize = Vector2.ZERO
 	myScreenSize = OS.get_window_size()
@@ -13,8 +8,12 @@ func _ready():
 	OS.set_window_position(
 		OS.get_screen_position(OS.get_current_screen()) + 
 		OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
+	var player = load("res://src/objects/player/Player.tscn")
+	player.connect("state_change",self,"debug_update_player_state")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	pass
+
+func debug_update_player_state(string):
+	$DEBUG/Label.text = str(string)

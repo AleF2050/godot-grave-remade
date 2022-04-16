@@ -4,6 +4,9 @@ extends KinematicBody2D
 enum {
 	GROUND,
 	ROLL
+	N_ATTACK1
+	N_ATTACK2
+	N_ATTACK3
 }
 
 # ... INIT VARIABLES
@@ -11,6 +14,8 @@ export var move_speed = 90
 export var roll_speed = 160
 var speed = Vector2()
 var _state = GROUND
+
+signal state_change(new_state)
 
 #export var gravity = 3
 #export var run_speed_factor = 1.8
@@ -42,18 +47,26 @@ func _physics_process(delta):
 			else:
 				$AnimatedSprite.animation = "stand"
 				speed = Vector2(0.0,0.0)
-				
+			
+			# Roll character
 			if Input.is_action_pressed("k_action1"):
-				$AnimatedSprite.animation = "rolling"
 				_state = ROLL
+				emit_signal("state_change", _state)
 				if $AnimatedSprite.flip_h == true:
 					speed.x = -roll_speed
 				elif $AnimatedSprite.flip_h == false:
 					speed.x = roll_speed
-			
 			speed = move_and_slide(speed)
+			
+			# Begin attack sequence
+			if Input.is_action_pressed("k_action2"):
+				$AnimatedSprite.animation = "n_attack1"
+				_state = N_ATTACK1
+			
+			
 		ROLL: # ROLL STATE
 			# Rolling
+			$AnimatedSprite.animation = "rolling"
 			if !(speed.x >= 2 or speed.x <= 2):
 				if $AnimatedSprite.flip_h == true:
 					speed.x += 2
