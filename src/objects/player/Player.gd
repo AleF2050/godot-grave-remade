@@ -63,6 +63,7 @@ func _physics_process(delta):
 
 
 func _on_AnimatedSprite_animation_finished():
+	# Stop rolling after animation and move on to GROUND state
 	if $AnimatedSprite.animation == "rolling":
 		_state = GROUND
 		$AnimatedSprite.animation = "stand"
