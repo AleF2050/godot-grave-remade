@@ -118,6 +118,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameControl="*res://src/objects/game/GameControl.tscn"
+Signals="*res://src/objects/game/Signals.gd"
 
 [display]
 

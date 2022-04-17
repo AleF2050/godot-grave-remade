@@ -15,8 +15,6 @@ export var roll_speed = 160
 var speed = Vector2()
 var _state = GROUND
 
-signal state_change(new_state)
-
 #export var gravity = 3
 #export var run_speed_factor = 1.8
 #var run_speed = move_speed * run_speed_factor
@@ -26,7 +24,9 @@ onready var player = get_node(".")
 
 # ... READY
 func _ready():
-	pass
+	# We might want to start off with a reference to connect GameControl in order to access the Signal bus.
+	var globalControl = get_tree().get_nodes_in_group("globalControl")[0]
+	Signals.connect("state_change", globalControl, "_debug_on_player_state_change")
 
 # ... PHYSICS PROCESS (mostly for movement)
 func _physics_process(delta):
@@ -51,7 +51,6 @@ func _physics_process(delta):
 			# Roll character
 			if Input.is_action_pressed("k_action1"):
 				_state = ROLL
-				emit_signal("state_change", _state)
 				if $AnimatedSprite.flip_h == true:
 					speed.x = -roll_speed
 				elif $AnimatedSprite.flip_h == false:
@@ -73,6 +72,7 @@ func _physics_process(delta):
 				elif $AnimatedSprite.flip_h == false:
 					speed.x -= 2
 			speed = move_and_slide(speed)
+	Signals.emit_signal("state_change", _state)
 
 
 func _on_AnimatedSprite_animation_finished():
