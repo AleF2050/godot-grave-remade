@@ -8,6 +8,9 @@ func _ready():
 	OS.set_window_position(
 		OS.get_screen_position(OS.get_current_screen()) + 
 		OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
+	
+	# GameControl signal connections
+	Signals.connect("state_change", self, "_debug_on_player_state_change")
 
 
 func _process(delta):

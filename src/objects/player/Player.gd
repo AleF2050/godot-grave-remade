@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 # ENUM FOR STATES
-enum {
+enum state {
 	GROUND,
 	ROLL
 	N_ATTACK1
@@ -13,7 +13,7 @@ enum {
 export var move_speed = 90
 export var roll_speed = 160
 var speed = Vector2()
-var _state = GROUND
+var _state = state.GROUND
 
 #export var gravity = 3
 #export var run_speed_factor = 1.8
@@ -24,15 +24,15 @@ onready var player = get_node(".")
 
 # ... READY
 func _ready():
-	# We might want to start off with a reference to connect GameControl in order to access the Signal bus.
-	var globalControl = get_tree().get_nodes_in_group("globalControl")[0]
-	Signals.connect("state_change", globalControl, "_debug_on_player_state_change")
+	pass# We might want to start off with a reference to connect GameControl in order to access the Signal bus.
+	#var globalControl = get_tree().get_nodes_in_group("globalControl")[0]
+	#Signals.connect("state_change", globalControl, "_debug_on_player_state_change")
 
 # ... PHYSICS PROCESS (mostly for movement)
 func _physics_process(delta):
 	# State check
 	match _state:
-		GROUND: # GROUND STATE
+		state.GROUND: # GROUND STATE
 			# Moving the character
 			if Input.is_action_pressed("k_left"):
 				$AnimatedSprite.flip_h = true
@@ -49,8 +49,8 @@ func _physics_process(delta):
 				speed = Vector2(0.0,0.0)
 			
 			# Roll character
-			if Input.is_action_pressed("k_action1"):
-				_state = ROLL
+			if Input.is_action_just_pressed("k_action1"):
+				_state = state.ROLL
 				if $AnimatedSprite.flip_h == true:
 					speed.x = -roll_speed
 				elif $AnimatedSprite.flip_h == false:
@@ -58,12 +58,12 @@ func _physics_process(delta):
 			speed = move_and_slide(speed)
 			
 			# Begin attack sequence
-			if Input.is_action_pressed("k_action2"):
+			if Input.is_action_just_pressed("k_action2"):
 				$AnimatedSprite.animation = "n_attack1"
-				_state = N_ATTACK1
+				_state = state.N_ATTACK1
 			
 			
-		ROLL: # ROLL STATE
+		state.ROLL: # ROLL STATE
 			# Rolling
 			$AnimatedSprite.animation = "rolling"
 			if !(speed.x >= 2 or speed.x <= 2):
@@ -78,6 +78,12 @@ func _physics_process(delta):
 func _on_AnimatedSprite_animation_finished():
 	# Stop rolling after animation and move on to GROUND state
 	if $AnimatedSprite.animation == "rolling":
-		_state = GROUND
+		_state = state.GROUND
+		$AnimatedSprite.animation = "stand"
+		speed.x = 0
+	
+	# End n. attack 1-etc. animations if nothing has been inputted.
+	if $AnimatedSprite.animation == "n_attack1":
+		_state = state.GROUND
 		$AnimatedSprite.animation = "stand"
 		speed.x = 0
