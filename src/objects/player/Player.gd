@@ -57,8 +57,8 @@ func _physics_process(delta):
 			
 			# Begin attack sequence
 			if Input.is_action_just_pressed("k_action2"):
-				$AnimatedSprite.animation = "n_attack1"
 				_state = state.N_ATTACK1
+				speed.x = 0
 			
 			
 		state.ROLL: # ROLL STATE
@@ -72,18 +72,39 @@ func _physics_process(delta):
 			speed = move_and_slide(speed)
 			
 			
-	Signals.emit_signal("state_change", _state)
+		state.N_ATTACK1: # NORMAL ATTACK STATE, SEQ 1
+			$AnimatedSprite.animation = "n_attack1"
+			if Input.is_action_just_pressed("k_action2") && anim_hitframe_range(2, 4):
+				_state = state.N_ATTACK2
+			
+			
+		state.N_ATTACK2: # NORMAL ATTACK STATE, SEQ 2
+			$AnimatedSprite.animation = "n_attack2"
+			if Input.is_action_just_pressed("k_action2") && anim_hitframe_range(3, 4):
+				_state = state.N_ATTACK3
+			
+			
+		state.N_ATTACK3: # NORMAL ATTACK STATE, SEQ 3
+			$AnimatedSprite.animation = "n_attack3"
+			
+			
+	Signals.emit_signal("state_change", _state) #Updates state for debugging
 
 
 func _on_AnimatedSprite_animation_finished():
-	# Stop rolling after animation and move on to GROUND state
-	if $AnimatedSprite.animation == "rolling":
+	# Stop rolling after animation or finish attack animations and move on to GROUND state
+	if $AnimatedSprite.animation == "rolling" or $AnimatedSprite.animation == "n_attack1" or $AnimatedSprite.animation == "n_attack2" or $AnimatedSprite.animation == "n_attack3":
 		_state = state.GROUND
 		$AnimatedSprite.animation = "stand"
 		speed.x = 0
 	
-	# End n. attack 1-etc. animations if nothing has been inputted.
-	if $AnimatedSprite.animation == "n_attack1":
-		_state = state.GROUND
-		$AnimatedSprite.animation = "stand"
-		speed.x = 0
+#	# End n. attack 1-etc. animations if nothing has been inputted.
+#	if $AnimatedSprite.animation == "n_attack1":
+#		_state = state.GROUND
+#		$AnimatedSprite.animation = "stand"
+#		speed.x = 0
+
+
+func anim_hitframe_range(_min, _max):
+	# Checks whenever the current animation frame is under the specified frame range before going true.
+	return $AnimatedSprite.frame >= _min and $AnimatedSprite.frame <= _max
