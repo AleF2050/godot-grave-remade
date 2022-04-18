@@ -197,7 +197,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -24 )
 frames = SubResource( 4 )
 animation = "n_attack3"
-frame = 1
+frame = 4
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
