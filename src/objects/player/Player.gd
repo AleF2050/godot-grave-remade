@@ -24,9 +24,7 @@ onready var player = get_node(".")
 
 # ... READY
 func _ready():
-	pass# We might want to start off with a reference to connect GameControl in order to access the Signal bus.
-	#var globalControl = get_tree().get_nodes_in_group("globalControl")[0]
-	#Signals.connect("state_change", globalControl, "_debug_on_player_state_change")
+	pass
 
 # ... PHYSICS PROCESS (mostly for movement)
 func _physics_process(delta):
@@ -72,6 +70,8 @@ func _physics_process(delta):
 				elif $AnimatedSprite.flip_h == false:
 					speed.x -= 2
 			speed = move_and_slide(speed)
+			
+			
 	Signals.emit_signal("state_change", _state)
 
 

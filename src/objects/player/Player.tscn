@@ -6,14 +6,6 @@
 [ext_resource path="res://res/gfx/player/s_skeleton_roll_strip7.png" type="Texture" id=4]
 [ext_resource path="res://res/gfx/player/s_skeleton_attack_one_strip5.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
-region = Rect2( 200, 0, 40, 48 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
@@ -98,18 +90,16 @@ region = Rect2( 480, 0, 96, 48 )
 atlas = ExtResource( 4 )
 region = Rect2( 576, 0, 96, 48 )
 
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 200, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 40, 48 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 12 ) ],
-"loop": true,
-"name": "jmp_up",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 13 ) ],
-"loop": true,
-"name": "jmp_down",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "move",
@@ -129,6 +119,16 @@ animations = [ {
 "loop": true,
 "name": "rolling",
 "speed": 9.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "jmp_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ) ],
+"loop": true,
+"name": "jmp_up",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
