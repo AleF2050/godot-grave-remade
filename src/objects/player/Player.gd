@@ -97,12 +97,6 @@ func _on_AnimatedSprite_animation_finished():
 		_state = state.GROUND
 		$AnimatedSprite.animation = "stand"
 		speed.x = 0
-	
-#	# End n. attack 1-etc. animations if nothing has been inputted.
-#	if $AnimatedSprite.animation == "n_attack1":
-#		_state = state.GROUND
-#		$AnimatedSprite.animation = "stand"
-#		speed.x = 0
 
 
 func anim_hitframe_range(_min, _max):
