@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/L_GraveYard.gd" type="Script" id=1]
 [ext_resource path="res://src/objects/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://res/gfx/environment/s_wall.png" type="Texture" id=3]
+[ext_resource path="res://src/objects/entities/E_Knight.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 31.8622, 0.0779419, 31.8622, 0.0779419, 0.0779419, 32, 0.0779419 )
@@ -46,4 +47,7 @@ format = 1
 tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 144, 160 )
+position = Vector2( 104, 160 )
+
+[node name="E_Knight" parent="." groups=["enemies", "entities"] instance=ExtResource( 4 )]
+position = Vector2( 208, 160 )
