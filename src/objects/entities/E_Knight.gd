@@ -6,6 +6,8 @@ enum state {
 }
 
 var _state = state.CHASE
+export var move_speed = 30
+var speed = Vector2.ZERO
 
 func _ready():
 	$Animation.play("idle")
@@ -18,7 +20,15 @@ func _physics_process(delta):
 		state.CHASE:
 			$Animation.play("walk")
 			if is_instance_valid(player):
-				print("There is a player.")
 				$SpritePivot.scale.x = sign(player.global_position.x - global_position.x)
+			
+			if get_position().distance_to(player.position) > 42:
+				speed.x = ($SpritePivot.scale.x * move_speed)
+			else:
+				speed.x = 0
+			
+			speed = move_and_slide(speed)
 
-# https://www.youtube.com/watch?v=boHDx303FUo&list=PL9FzW-m48fn0mblTG_KFDg81AMXDPKBE5&index=11  7:30
+# todo:
+# - fix sprite jittering
+# - prevent other objects from pushing

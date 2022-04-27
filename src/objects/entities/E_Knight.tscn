@@ -19,6 +19,10 @@ region = Rect2( 40, 0, 40, 48 )
 atlas = ExtResource( 1 )
 region = Rect2( 80, 0, 40, 48 )
 
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 40, 48 )
+
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
@@ -35,9 +39,29 @@ region = Rect2( 80, 0, 40, 48 )
 atlas = ExtResource( 3 )
 region = Rect2( 120, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 40, 48 )
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 80, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 80, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 80, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 4 )
+region = Rect2( 240, 0, 80, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 80, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 4 )
+region = Rect2( 400, 0, 80, 48 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
@@ -87,30 +111,6 @@ region = Rect2( 800, 0, 80, 48 )
 atlas = ExtResource( 2 )
 region = Rect2( 880, 0, 80, 48 )
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 80, 48 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 4 )
-region = Rect2( 80, 0, 80, 48 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 80, 48 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 4 )
-region = Rect2( 240, 0, 80, 48 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 4 )
-region = Rect2( 320, 0, 80, 48 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 4 )
-region = Rect2( 400, 0, 80, 48 )
-
 [sub_resource type="SpriteFrames" id=20]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
@@ -118,25 +118,25 @@ animations = [ {
 "name": "idle",
 "speed": 4.0
 }, {
+"frames": [ SubResource( 24 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 24 ) ],
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
-"name": "hit",
+"name": "death",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "attack",
 "speed": 9.0
-}, {
-"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
-"loop": true,
-"name": "death",
-"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=31]
@@ -275,7 +275,6 @@ extents = Vector2( 5.5, 14.5 )
 
 [node name="E_Knight" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource( 6 )
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -297,3 +296,10 @@ anims/walk = SubResource( 23 )
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -14.5 )
 shape = SubResource( 22 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -13.0
+margin_top = -47.0
+margin_right = 27.0
+margin_bottom = -33.0
