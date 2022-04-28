@@ -8,10 +8,6 @@
 [ext_resource path="res://res/gfx/player/s_skeleton_attack_three_strip6.png" type="Texture" id=6]
 [ext_resource path="res://res/gfx/player/s_skeleton_attack_two_strip5.png" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
-region = Rect2( 200, 0, 40, 48 )
-
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 75, 48 )
@@ -52,30 +48,6 @@ region = Rect2( 288, 0, 96, 48 )
 atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 96, 48 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
-region = Rect2( 40, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 80, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 120, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
-region = Rect2( 160, 0, 40, 48 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
-region = Rect2( 200, 0, 40, 48 )
-
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 96, 48 )
@@ -112,6 +84,30 @@ region = Rect2( 40, 0, 40, 48 )
 atlas = ExtResource( 2 )
 region = Rect2( 80, 0, 40, 48 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 40, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 80, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 120, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 160, 0, 40, 48 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 200, 0, 40, 48 )
+
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
@@ -144,13 +140,12 @@ region = Rect2( 480, 0, 96, 48 )
 atlas = ExtResource( 4 )
 region = Rect2( 576, 0, 96, 48 )
 
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 200, 0, 40, 48 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 13 ) ],
-"loop": true,
-"name": "jmp_down",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
 "name": "n_attack1",
@@ -159,11 +154,6 @@ animations = [ {
 "frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "n_attack2",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "move",
 "speed": 9.0
 }, {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
@@ -176,6 +166,11 @@ animations = [ {
 "name": "stand",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "move",
+"speed": 9.0
+}, {
 "frames": [ SubResource( 12 ) ],
 "loop": true,
 "name": "jmp_up",
@@ -185,6 +180,11 @@ animations = [ {
 "loop": true,
 "name": "rolling",
 "speed": 9.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "jmp_down",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -192,14 +192,12 @@ extents = Vector2( 5.96875, 14.125 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -24 )
 frames = SubResource( 4 )
 animation = "stand"
-frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
