@@ -102,3 +102,9 @@ func _on_AnimatedSprite_animation_finished():
 func anim_hitframe_range(_min, _max):
 	# Checks whenever the current animation frame is under the specified frame range before going true.
 	return $AnimatedSprite.frame >= _min and $AnimatedSprite.frame <= _max
+
+
+#func anim_hitframe(_frame):
+#	# Checks whenever the current animation frame is under the specified frame before going true.
+#	var _fr_range = $AnimatedSprite.speed_scale
+#	return $AnimatedSprite.frame >= _frame and $AnimatedSprite.frame < _fr_range
